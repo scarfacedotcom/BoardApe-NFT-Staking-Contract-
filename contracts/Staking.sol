@@ -37,6 +37,12 @@ contract Staking {
     }
 
     function withdraw()external{
+        uint userStake = stakes[msg.sender].stakedAmount;
+        require(userStake > 0, "you currently dont have any stake");
+        require(IERC20(platformToken).balanceOf(address(this)) >= userStake, "NO funds");
 
+        stakes[msg.sender].stakedAmount = 0;
+
+        IERC20(platformToken).transfer(msg.sender, userStake);
     }
 }
