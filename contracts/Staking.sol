@@ -10,8 +10,8 @@ contract Staking {
     address boardApeNFT;
 
     struct StakedData {
-        uint stakedAmount,
-        uint stakedTime,
+        uint stakedAmount;
+        uint stakedTime;
     }
 
     mapping (address => StakedData) stakes;
@@ -22,5 +22,21 @@ contract Staking {
         admin = msg.sender;
         boardApeNFT = _boardApeNFT;
         platformToken = _platformToken;
+    }
+
+    function stake(uint256 _amount) external{
+        require(_amount > 0, "Stake amount has to be greater than zero");
+        require(IERC20(platformToken).balanceOf(msg.sender) >= _amount, "You are a broke ass");
+        require(IERC721(boardApeNFT).balanceOf(msg.sender) > 0, "You dont have an NFT");
+
+        IERC20(platformToken).transferFrom(msg.sender, address(this), _amount);
+
+        StakedData storage sdata = stakes[msg.sender];
+        sdata.stakedAmount = _amount;
+        sdata.stakedTime = block.timestamp;
+    }
+
+    function withdraw()external{
+
     }
 }
