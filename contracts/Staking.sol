@@ -45,4 +45,20 @@ contract Staking {
 
         IERC20(platformToken).transfer(msg.sender, userStake);
     }
+
+    function calWithdrawAmount() public{
+        StakedData storage sData = stakes[msg.sender];
+        uint balance = sData.stakedAmount;
+
+        require(balance > 0, "you are broke");
+        require(IERC20(platformToken).balanceOf(address(this)) >= balance, "no tokrns bro");
+
+        uint totalTime = block.timestamp - sData.stakedTime;
+        uint gain = ((balance / 25820000) * totalTime);
+        uint withdrawal = gain + balance;
+
+        sData.stakedAmount= 0;
+        IERC20(platformToken).transfer(msg.sender, withdrawal);
+
+    }
 }
