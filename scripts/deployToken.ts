@@ -24,12 +24,12 @@ async function main() {
   const helpers = require("@nomicfoundation/hardhat-network-helpers");
   await helpers.impersonateAccount(boredApeNFTHolder);
   const impersonatedSigner = await ethers.getSigner(boredApeNFTHolder);
-  const amt = ethers.utils.parseUnits("1000");
+  const amt = ethers.utils.parseUnits("1");
   console.log(`Impersonated Signers Address is ${impersonatedSigner.address}`);
 
   const transferToken = await token.transfer(impersonatedSigner.address, amt);
   const transferWaited = await transferToken.wait();
-  console.log(`Mint Trabsaction ${transferWaited}`);
+  console.log(`Mint Transaction ${transferWaited}`);
 
   const impersonatedSignerBal = await token.balanceOf(impersonatedSigner.address);
   console.log(`Signer Balance ${impersonatedSignerBal}`)
