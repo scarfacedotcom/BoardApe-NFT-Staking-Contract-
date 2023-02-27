@@ -10,10 +10,13 @@ async function main() {
 
   await boardApeStaking.deployed();
 
-  console.log(`BoardApeStaking COntract has been deplyed to ${boardApeStaking.address}`);//Contract has been deplyed to
+  console.log(`BoardApeStaking COntract has been deplyed to ${boardApeStaking.address}`);//Contract has been deplyed to 0xD2D5e508C82EFc205cAFA4Ad969a4395Babce026
 
   const stakingAdmin = await boardApeStaking.admin()
-  console.log(`Staking Admin ${stakingAdmin}`);
+  console.log(`Staking Admin ${stakingAdmin}`); // 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+
+//   BoardApeStaking COntract has been deplyed to 0xD2D5e508C82EFc205cAFA4Ad969a4395Babce026
+//   Staking Admin 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
 
 
 }
