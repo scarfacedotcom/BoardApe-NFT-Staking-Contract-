@@ -47,6 +47,13 @@ const stakeContract = await ethers.getContractAt("BoardApeStaking", "stakeContra
   const impersonatedBlance = await stakeCoin.balanceOf(impersonatedSigner.address);
   console.log(`Impersonated Balance is ${impersonatedBlance}`);
 
+  const withdrawTnx = await stakeContract.connect(impersonatedSigner).calculateWithdrawalAmount();
+  //const withdrawReceipt = await withdrawTnx.wait();
+  console.log(`Withdrawal transaction; ${withdrawTnx}`);
+
+  const impersonatedBalanceAfter = await stakeCoin.balanceOf(impersonatedSigner.address);
+  console.log(`Impersonated token balance After: ${impersonatedBalanceAfter}`);
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
